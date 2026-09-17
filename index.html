@@ -107,6 +107,8 @@
         // Keep the game's pixel grid stable, including on Retina screens.
         matchWebGLToCanvasSize: false,
         devicePixelRatio: 1,
+        // Return to the launch screen after Unity has finished shutting down.
+        onQuit: () => location.reload(),
         showBanner: (message, type) => {
           if (type === "error") fail(message);
           else console.warn(message);
