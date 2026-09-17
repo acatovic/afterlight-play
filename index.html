@@ -72,7 +72,12 @@
     retry.addEventListener("click", () => location.reload());
     canvas.addEventListener("pointerdown", () => canvas.focus());
     canvas.addEventListener("keydown", event => {
-      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Tab", "PageUp", "PageDown"].includes(event.key)) event.preventDefault();
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Tab", "PageUp", "PageDown"].includes(event.key)) event.preventDefault();
+    });
+    // Unity's Input.inputString needs the printable keypress. Canceling Space
+    // on keydown suppresses it; cancel scrolling only after keypress is emitted.
+    canvas.addEventListener("keypress", event => {
+      if (event.key === " ") event.preventDefault();
     });
     fullscreen.addEventListener("click", async () => {
       try {
